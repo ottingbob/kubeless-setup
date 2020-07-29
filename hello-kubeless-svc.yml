@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    created-by: kubeless
+    function: hello
+  name: hello
+  ownerReferences:
+  - apiVersion: kubeless.io/v1beta1
+    kind: Function
+    name: hello
+    uid: 08475c92-4c23-41b6-ac0f-ef22b5ef3bb3
+spec:
+  ports:
+  - name: http-function-port
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    created-by: kubeless
+    function: hello
+  type: ClusterIP

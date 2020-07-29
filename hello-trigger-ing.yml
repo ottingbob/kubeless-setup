@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  labels:
+    created-by: kubeless
+  name: hello
+  # ownerReferences:
+  # - apiVersion: kubeless.io/v1beta1
+  #   kind: HTTPTrigger
+  #   name: hello
+spec:
+  tls:
+  - hosts:
+    - <hostname>
+    secretName: hello-func-tls
+  rules:
+  - host: <hostname>
+    http:
+      paths:
+      - backend:
+          serviceName: hello
+          servicePort: 80
